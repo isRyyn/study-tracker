@@ -1,0 +1,19 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#display {
+    width: 100%;
+}
+
+#start {
+    background-color: greenyellow;
+}
+
+#reset {
+    background-color: red;
+    color: white;
+}
