@@ -27,6 +27,11 @@
     width: 100%;
 }
 
+#playBtn {
+    width: 100px;
+    height: 30px;
+}
+
 #laps {
     max-height: 60vh;
     overflow: scroll;
