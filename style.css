@@ -4,19 +4,23 @@
     justify-content: center;
     align-items: flex-start;
     text-align: center;
+}
 
-    .btn-row {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
+.main-sub-container {
+    width: 60vw;
+}
 
-    .laps-container {
-        margin-top: 10px;
-        border: solid 1px lightgray;
-        min-width: 200px;   
-        min-height: 40vh;
-    }
+.btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.laps-container {
+    margin-top: 10px;
+    border: solid 1px lightgray;
+    min-width: 200px;
+    min-height: 40vh;
 }
 
 #display {
@@ -28,14 +32,14 @@
     overflow: scroll;
     margin-left: -40px;
     list-style: none;
+}
 
-    li {
-        margin-bottom: 5px;
-    }
+#laps li {
+    margin-bottom: 5px;
 }
 
 #clearLaps {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .study {
