@@ -20,7 +20,7 @@
     margin-top: 10px;
     border: solid 1px lightgray;
     min-width: 200px;
-    min-height: 40vh;
+    min-height: 60vh;
 }
 
 #display {
@@ -48,4 +48,15 @@
 
 .break {
     color: red;
+}
+
+
+@media screen and (max-width: 568px) {
+    .main-container {
+        margin-top: 2rem !important;
+    }
+
+    .main-sub-container {
+        width: 80vw;
+    }
 }
