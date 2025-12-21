@@ -5,7 +5,7 @@ var lapsScreen = document.getElementById("laps");
 var playBtn = document.getElementById("playBtn");
 var resetBtn = document.getElementById("resetBtn");
 var clearLapsBtn = document.getElementById("clearLaps");
-
+var changeDisplayBtn = document.getElementById("changeLapsType");
 
 // Time
 let miliseconds = 0;
@@ -18,7 +18,10 @@ let hours = 0;
 let startTime = null;
 let diff = null;
 let isPaused = false;
+
 let laps = [];
+let lapsMinutes = [];
+let minuteLapType = true;
 
 var interval = null;
 playBtn.addEventListener("click", function () {
@@ -44,6 +47,8 @@ playBtn.addEventListener("click", function () {
     }, 1);
 });
  
+
+// Event listeners
 resetBtn.addEventListener("click", function () {
     playBtn.innerHTML = 'Start';
     resetInterval();
@@ -56,6 +61,14 @@ clearLapsBtn.addEventListener("click", function () {
     lapsScreen.innerHTML = '';
     clearLapsBtn.hidden = true;
 });
+
+
+changeDisplayBtn.addEventListener("click", function() {
+    minuteLapType = !minuteLapType;
+    changeDisplayBtn.innerHTML = minuteLapType ? 'Show laps' : 'Show minutes';
+    setLapsScreen();
+});
+
 
 function resetInterval() {
     clearInterval(interval);
@@ -74,9 +87,19 @@ function updateTime() {
 }
 
 function setLaps() {
-
     laps.push(display.innerHTML);
-    lapsScreen.innerHTML = laps.map((lap, i) => {
+    lapsMinutes.push((Math.floor(diff / 60000) % 60));
+    
+    setLapsScreen();
+
+    clearLapsBtn.hidden = false;
+    changeDisplayBtn.hidden = false;
+}
+
+function setLapsScreen() {
+    const arr = minuteLapType ? lapsMinutes : laps;
+
+    lapsScreen.innerHTML = arr.map((lap, i) => {
         let type = i % 2 == 0 ? 'Study' : 'Break';
         let className = type.toLowerCase();
 
@@ -87,8 +110,6 @@ function setLaps() {
         </li>
         `
     }).join('');
-
-    clearLapsBtn.hidden = false;
 }
 
 function formatVal(unit) {
