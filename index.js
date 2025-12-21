@@ -6,6 +6,7 @@ var playBtn = document.getElementById("playBtn");
 var resetBtn = document.getElementById("resetBtn");
 var clearLapsBtn = document.getElementById("clearLaps");
 var changeDisplayBtn = document.getElementById("changeLapsType");
+var darkModeBtn = document.getElementById("modeImg");
 
 // Time
 let miliseconds = 0;
@@ -22,6 +23,7 @@ let isPaused = false;
 let laps = [];
 let lapsMinutes = [];
 let minuteLapType = true;
+let darkModeOn = true;
 
 var interval = null;
 playBtn.addEventListener("click", function () {
@@ -69,6 +71,21 @@ changeDisplayBtn.addEventListener("click", function() {
     setLapsScreen();
 });
 
+darkModeBtn.addEventListener("click", function () {
+    darkModeOn = !darkModeOn;
+    darkModeBtn.src = darkModeOn ? 'bulb-on.png' : 'bulb-off.png';
+
+    if (darkModeOn) {
+        document.documentElement.style.setProperty('--primary-background-color', 'black');
+        document.documentElement.style.setProperty('--primary-color', 'white');
+    } else {
+        document.documentElement.style.setProperty('--primary-background-color', 'white');
+        document.documentElement.style.setProperty('--primary-color', 'black');
+    }
+    
+});
+
+// End Event Listeners
 
 function resetInterval() {
     clearInterval(interval);

@@ -1,3 +1,13 @@
+:root {
+    --primary-background-color: white;
+    --primary-color: black;
+}
+
+body {
+    background-color: var(--primary-background-color);
+    color: var(--primary-color);
+}
+
 .main-container {
     margin-top: 5rem;
     display: flex;
@@ -47,12 +57,16 @@
     margin-top: 20px;
 }
 
+#modeImg {
+    width: 15px;
+}
+
 .study {
     color: green;
 }
 
 .break {
-    color: red;
+    color: orangered;
 }
 
 
