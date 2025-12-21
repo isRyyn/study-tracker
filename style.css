@@ -1,19 +1,47 @@
 .main-container {
+    margin-top: 5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    text-align: center;
+
+    .btn-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .laps-container {
+        margin-top: 10px;
+        border: solid 1px lightgray;
+        min-width: 200px;   
+        min-height: 40vh;
+    }
 }
 
 #display {
     width: 100%;
 }
 
-#start {
-    background-color: greenyellow;
+#laps {
+    max-height: 60vh;
+    overflow: scroll;
+    margin-left: -40px;
+    list-style: none;
+
+    li {
+        margin-bottom: 5px;
+    }
 }
 
-#reset {
-    background-color: red;
-    color: white;
+#clearLaps {
+    margin-top: 10px;
+}
+
+.study {
+    color: green;
+}
+
+.break {
+    color: red;
 }

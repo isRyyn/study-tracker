@@ -1,9 +1,10 @@
 // Elements
 var display = document.getElementById("display");
+var lapsScreen = document.getElementById("laps");
 
 var playBtn = document.getElementById("playBtn");
 var resetBtn = document.getElementById("resetBtn");
-
+var clearLapsBtn = document.getElementById("clearLaps");
 
 
 // Time
@@ -17,16 +18,17 @@ let hours = 0;
 let startTime = null;
 let diff = null;
 let isPaused = false;
+let laps = [];
 
 var interval = null;
 playBtn.addEventListener("click", function () {
     
     if (interval !== null) {
         diff = Date.now() - startTime;
-        playBtn.innerHTML = 'Start';
-        resetInterval();
 
         isPaused = true;
+
+        setLaps();
 
         return;
     }
@@ -49,6 +51,12 @@ resetBtn.addEventListener("click", function () {
     display.innerHTML = '00 : 00 : 00 : 000';
 });
 
+clearLapsBtn.addEventListener("click", function () {
+    laps = [];
+    lapsScreen.innerHTML = '';
+    clearLapsBtn.hidden = true;
+});
+
 function resetInterval() {
     clearInterval(interval);
     interval = null;
@@ -63,6 +71,24 @@ function updateTime() {
     minutes = Math.floor(diff / 60000) % 60;
     hours = Math.floor(diff/ 3600000);
      
+}
+
+function setLaps() {
+
+    laps.push(display.innerHTML);
+    lapsScreen.innerHTML = laps.map((lap, i) => {
+        let type = i % 2 == 0 ? 'Study' : 'Break';
+        let className = type.toLowerCase();
+
+        return `
+        <li>
+            <span class="${className}">${ type }  : </span>
+            <span>${ lap }</span>
+        </li>
+        `
+    }).join('');
+
+    clearLapsBtn.hidden = false;
 }
 
 function formatVal(unit) {
