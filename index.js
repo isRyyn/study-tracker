@@ -134,7 +134,7 @@ function setLapsScreen() {
         return `
         <li>
             <span class="${className}">${ type }  : </span>
-            <span>${ lap } ${ !minuteLapType ? 'minutes' : '' }</span>
+            <span>${ lap } ${ minuteLapType ? 'minutes' : '' }</span>
         </li>
         `
     }).join('');
