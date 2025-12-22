@@ -71,10 +71,10 @@ body {
 }
 
 .indicator {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bolder;
     position: absolute;
-    top: -20px;
+    top: -32px;
     right: 3px;
 }
 

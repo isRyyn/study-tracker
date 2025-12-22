@@ -29,37 +29,18 @@ let darkModeOn = true;
 
 var interval = null;
 var intervalIndex = 0;
-playBtn.addEventListener("click", function () {
-    indicator.hidden = false;
-
-    if (interval !== null) {
-        diff = Date.now() - startTime;
-
-        isPaused = true;
-        playBtn.innerHTML = intervalIndex % 2 == 0 ? 'Start grind!' : 'Take a break!';
-        indicator.style.color = intervalIndex % 2 == 0 ? 'red' : 'green';
- 
-        setLaps();
-
-        intervalIndex++;
-        return;
-    }
-
-    startTime = Date.now() - (isPaused ? diff : 0);
-
-    isPaused = false;
-    playBtn.innerHTML = 'Take a break!';
-    indicator.style.color = 'green';
-
-    interval = setInterval(function () {
-        updateTime();
-        display.innerHTML = `${formatVal(hours)} : ${formatVal(minutes)} : ${formatVal(seconds)} : ${formatMiliseconds(miliseconds)}`;
-
-    }, 1);
-});
- 
 
 // Event listeners
+document.addEventListener("keydown", (event) => {
+    if (event.key === ' ') {
+       playBtnFunctionlity();
+    }
+});
+
+playBtn.addEventListener("click", function () {
+    playBtnFunctionlity()
+});
+ 
 resetBtn.addEventListener("click", function () {
     resetInterval();
 });
@@ -97,6 +78,35 @@ darkModeBtn.addEventListener("click", function () {
 });
 
 // End Event Listeners
+
+function playBtnFunctionlity() {
+    indicator.hidden = false;
+
+    if (interval !== null) {
+        diff = Date.now() - startTime;
+
+        isPaused = true;
+        playBtn.innerHTML = intervalIndex % 2 == 0 ? 'Start grind!' : 'Take a break!';
+        indicator.style.color = intervalIndex % 2 == 0 ? 'red' : 'green';
+ 
+        setLaps();
+
+        intervalIndex++;
+        return;
+    }
+
+    startTime = Date.now() - (isPaused ? diff : 0);
+
+    isPaused = false;
+    playBtn.innerHTML = 'Take a break!';
+    indicator.style.color = 'green';
+
+    interval = setInterval(function () {
+        updateTime();
+        display.innerHTML = `${formatVal(hours)} : ${formatVal(minutes)} : ${formatVal(seconds)} : ${formatMiliseconds(miliseconds)}`;
+
+    }, 1);
+}
 
 function resetInterval() {
     clearInterval(interval);
