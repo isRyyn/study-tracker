@@ -31,6 +31,7 @@ body {
     border: solid 1px lightgray;
     min-width: 200px;
     min-height: 60vh;
+    position: relative;
 }
 
 #display {
@@ -69,6 +70,13 @@ body {
     color: orangered;
 }
 
+.indicator {
+    font-size: 2rem;
+    font-weight: bolder;
+    position: absolute;
+    top: -20px;
+    right: 3px;
+}
 
 @media screen and (max-width: 568px) {
     .main-container {

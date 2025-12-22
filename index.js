@@ -7,6 +7,7 @@ var resetBtn = document.getElementById("resetBtn");
 var clearLapsBtn = document.getElementById("clearLaps");
 var changeDisplayBtn = document.getElementById("changeLapsType");
 var darkModeBtn = document.getElementById("modeImg");
+var indicator = document.getElementsByClassName("indicator")[0];
 
 // Time
 let miliseconds = 0;
@@ -27,22 +28,29 @@ let minuteLapType = true;
 let darkModeOn = true;
 
 var interval = null;
+var intervalIndex = 0;
 playBtn.addEventListener("click", function () {
+    indicator.hidden = false;
     
     if (interval !== null) {
         diff = Date.now() - startTime;
 
         isPaused = true;
-
+        playBtn.innerHTML = intervalIndex % 2 == 0 ? 'Start grind!' : 'Take a break!';
+        indicator.style.color = intervalIndex % 2 == 0 ? 'red' : 'green';
+ 
         setLaps();
 
+        intervalIndex++;
         return;
     }
-    
 
     startTime = Date.now() - (isPaused ? diff : 0);
+
     isPaused = false;
-    playBtn.innerHTML = 'Lap';
+    playBtn.innerHTML = 'Take a break';
+    indicator.style.color = 'green';
+
     interval = setInterval(function () {
         updateTime();
         display.innerHTML = `${formatVal(hours)} : ${formatVal(minutes)} : ${formatVal(seconds)} : ${formatMiliseconds(miliseconds)}`;
@@ -53,18 +61,18 @@ playBtn.addEventListener("click", function () {
 
 // Event listeners
 resetBtn.addEventListener("click", function () {
-    playBtn.innerHTML = 'Start';
     resetInterval();
-
-    display.innerHTML = '00 : 00 : 00 : 000';
 });
 
 clearLapsBtn.addEventListener("click", function () {
+    resetInterval();
+
     laps = [];
     lapsMinutes = [];
     diffs = [];
     lapsScreen.innerHTML = '';
     clearLapsBtn.hidden = true;
+    changeDisplayBtn.hidden = true;
 });
 
 
@@ -92,7 +100,13 @@ darkModeBtn.addEventListener("click", function () {
 
 function resetInterval() {
     clearInterval(interval);
+
+    playBtn.innerHTML = 'Start';
+    display.innerHTML = '00 : 00 : 00 : 000';
+    indicator.hidden = true;
+    
     interval = null;
+    intervalIndex = 0;
 }
 
 
