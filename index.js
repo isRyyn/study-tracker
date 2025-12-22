@@ -141,7 +141,10 @@ function setLapsScreen() {
 }
 
 
-function getMinutes(val) {
+function getMinutes(val, roundToHours = true) {
+    if (!roundToHours) {
+        return Math.floor(val / 60000);
+    }
     return Math.floor(val / 60000) % 60;
 }
 
