@@ -31,7 +31,7 @@ var interval = null;
 var intervalIndex = 0;
 playBtn.addEventListener("click", function () {
     indicator.hidden = false;
-    
+
     if (interval !== null) {
         diff = Date.now() - startTime;
 
@@ -48,7 +48,7 @@ playBtn.addEventListener("click", function () {
     startTime = Date.now() - (isPaused ? diff : 0);
 
     isPaused = false;
-    playBtn.innerHTML = 'Take a break';
+    playBtn.innerHTML = 'Take a break!';
     indicator.style.color = 'green';
 
     interval = setInterval(function () {
