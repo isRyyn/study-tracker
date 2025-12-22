@@ -20,6 +20,7 @@ let startTime = null;
 let diff = null;
 let isPaused = false;
 
+let diffs = [];
 let laps = [];
 let lapsMinutes = [];
 let minuteLapType = true;
@@ -60,6 +61,8 @@ resetBtn.addEventListener("click", function () {
 
 clearLapsBtn.addEventListener("click", function () {
     laps = [];
+    lapsMinutes = [];
+    diffs = [];
     lapsScreen.innerHTML = '';
     clearLapsBtn.hidden = true;
 });
@@ -98,14 +101,22 @@ function updateTime() {
 
     miliseconds = diff % 1000;    
     seconds = Math.floor(diff / 1000) % 60;
-    minutes = Math.floor(diff / 60000) % 60;
+    minutes = getMinutes(diff);
     hours = Math.floor(diff/ 3600000);
      
 }
 
 function setLaps() {
     laps.push(display.innerHTML);
-    lapsMinutes.push((Math.floor(diff / 60000) % 60));
+    diffs.push(diff);
+    
+    const diffLength = diffs.length
+    if (diffLength < 2) {
+        lapsMinutes.push(getMinutes(diff));
+    } else {
+        lapsMinutes.push(getMinutes(diffs[diffLength - 1] - diffs[diffLength - 2]));
+    }
+    
     
     setLapsScreen();
 
@@ -123,10 +134,15 @@ function setLapsScreen() {
         return `
         <li>
             <span class="${className}">${ type }  : </span>
-            <span>${ lap }</span>
+            <span>${ lap } ${ !minuteLapType ? 'minutes' : '' }</span>
         </li>
         `
     }).join('');
+}
+
+
+function getMinutes(val) {
+    return Math.floor(val / 60000) % 60;
 }
 
 function formatVal(unit) {
