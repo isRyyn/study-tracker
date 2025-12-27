@@ -63,11 +63,7 @@ body {
 }
 
 .study {
-    color: green;
-}
-
-.break {
-    color: orangered;
+    color: darkturquoise;
 }
 
 .indicator {
@@ -76,6 +72,10 @@ body {
     position: absolute;
     top: -32px;
     right: 3px;
+}
+
+#pointsFace {
+    vertical-align: -1px;
 }
 
 @media screen and (max-width: 568px) {

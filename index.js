@@ -8,6 +8,8 @@ var clearLapsBtn = document.getElementById("clearLaps");
 var changeDisplayBtn = document.getElementById("changeLapsType");
 var darkModeBtn = document.getElementById("modeImg");
 var indicator = document.getElementsByClassName("indicator")[0];
+var pointsScreen = document.getElementById("points");
+var pointsFace = document.getElementById("pointsFace");
 
 // Time
 let miliseconds = 0;
@@ -26,6 +28,7 @@ let laps = [];
 let lapsMinutes = [];
 let minuteLapType = true;
 let darkModeOn = true;
+let points = 0;
 
 var interval = null;
 var intervalIndex = 0;
@@ -86,10 +89,16 @@ function playBtnFunctionlity() {
         diff = Date.now() - startTime;
 
         isPaused = true;
-        playBtn.innerHTML = intervalIndex % 2 == 0 ? 'Start grind!' : 'Take a break!';
-        indicator.style.color = intervalIndex % 2 == 0 ? 'red' : 'green';
+        if (intervalIndex % 2 == 0) {
+            playBtn.innerHTML = 'Start grind!';
+            indicator.style.color = 'red';
+        } else {
+            playBtn.innerHTML = 'Take a break!';
+            indicator.style.color = 'green';
+        }
  
         setLaps();
+        calculatePoints();
 
         intervalIndex++;
         return;
@@ -104,7 +113,6 @@ function playBtnFunctionlity() {
     interval = setInterval(function () {
         updateTime();
         display.innerHTML = `${formatVal(hours)} : ${formatVal(minutes)} : ${formatVal(seconds)} : ${formatMiliseconds(miliseconds)}`;
-
     }, 1);
 }
 
@@ -162,6 +170,24 @@ function setLapsScreen() {
         </li>
         `
     }).join('');
+}
+
+function calculatePoints() {
+    const lastTime = lapsMinutes[lapsMinutes.length - 1];
+    if (intervalIndex % 2 == 0) {
+        points += (lastTime * 100);
+    } else {
+        points -= (lastTime * 200);
+    }
+
+    pointsScreen.innerHTML = `Score: ${points}`;
+    if (points > 0) {
+        pointsFace.innerHTML = '<i class="fa-regular fa-face-smile"></i>';
+        pointsFace.style.color = 'green';
+    } else if (points < 0) {
+        pointsFace.innerHTML = '<i class="fa-regular fa-face-frown"></i>';
+        pointsFace.style.color = 'red';
+    }
 }
 
 
