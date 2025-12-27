@@ -75,9 +75,10 @@ body {
 }
 
 .score-container {
+    font-size: 0.8em;
     position: absolute;
-    right: 25px;
-    top: 25px;
+    right: 10px;
+    top: 10px;
 }
 
 #pointsFace {
