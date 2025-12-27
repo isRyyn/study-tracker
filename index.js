@@ -186,7 +186,7 @@ function calculatePoints() {
         pointsFace.style.color = 'green';
     } else if (points < 0) {
         pointsFace.innerHTML = '<i class="fa-regular fa-face-frown"></i>';
-        pointsFace.style.color = 'red';
+        pointsFace.style.color = 'indianred';
     }
 }
 

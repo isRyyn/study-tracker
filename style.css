@@ -74,6 +74,12 @@ body {
     right: 3px;
 }
 
+.score-container {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
 #pointsFace {
     vertical-align: -1px;
 }
