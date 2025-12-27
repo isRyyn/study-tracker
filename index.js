@@ -57,6 +57,10 @@ clearLapsBtn.addEventListener("click", function () {
     lapsScreen.innerHTML = '';
     clearLapsBtn.hidden = true;
     changeDisplayBtn.hidden = true;
+
+    points = 0;
+    pointsScreen.innerHTML = 'Score: 0';
+    pointsFace.innerHTML = '';
 });
 
 
